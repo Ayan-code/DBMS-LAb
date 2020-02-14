@@ -1,0 +1,39 @@
+create database Bank;
+use Bank;
+
+create table BRANCH(
+branch_name varchar(30),
+branch_city varchar(30),
+assets REAL,
+primary key(branch_name));
+
+create table BankACC(
+accno int,
+branch_name varchar(30),
+balance REAL,
+primary key(accno),
+foreign key(branch_name)references BRANCH(branch_name));
+
+create table DEPOSITOR(
+customer_name varchar(30),
+accno int,
+primary key(customer_name,accno),
+foreign key(accno) references BankACC(accno));
+
+create table BANKCUSTOMER(
+customer_name varchar(30),
+customer_street varchar(30),
+customer_city varchar(30),
+primary key(customer_name),
+foreign key(customer_name) references DEPOSITOR(customer_name));
+
+create table LOAN(
+loan_number int,
+branch_name varchar(30),
+amount REAL,
+primary key(loan_number),
+foreign key(branch_name)references BRANCH(branch_name));
+
+insert into BRANCH values('SBI_Chamrajpet','Bangalore',50000),('SBI_ResidencyRoad','Bangalore',10000),('SBI_ShivajiRoad','Bombay',20000),('SBI_ParliamentryRoad','Delhi',10000),('SBI_JantarMantar','Delhi',20000);
+insert into BankACC values(1,'SBI_Chamrajpet',2000),(2,'SBI_ResidencyRoad',5000),(3,'SBI_ShivajiRoad',6000),(4,'SBI_ParliamentryRoad',9000),(5,'SBI_JantarMantar',8000),(6,'SBI_ShivajiRoad',4000),(8,'SBI_ResidencyRoad',4000),(9,'SBI_ParliamentryRoad',3000),(10,'SBI_ResidencyRoad',5000),(11,'SBI_JantarMantar',2000);
+
